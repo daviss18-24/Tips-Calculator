@@ -1,5 +1,6 @@
 package com.example.tipcalculator
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -14,6 +15,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         var percentage: Int = 0
         binding.rbOptionOne.setOnCheckedChangeListener { _, isChecked ->
@@ -70,25 +74,37 @@ class MainActivity : AppCompatActivity() {
                 Snackbar
                     .make(binding.tieTotal, "Fill in all fields",Snackbar.LENGTH_LONG)
                     .show()
-            }else{
+            }else {
                 val totalTable: Float = totalTableTemp.toString().toFloat()
                 val nPeople: Int = numOfPeopleSelected
 
-                val totalTemp = totalTable /nPeople
+                val totalTemp = totalTable / nPeople
                 val tips = totalTemp * percentage / 100
                 val totalWithTips = totalTemp + tips
-                binding.tvResult.text  = "Total with tips $totalWithTips"
 
+                val intent = Intent(this, SummaryActivity::class.java)
+                intent.apply {
+                    putExtra("totalTable", totalTable)
+                    putExtra("numPeople", numOfPeopleSelected)
+                    putExtra("percentage", percentage)
+                    putExtra("totalAmount", totalWithTips)
+                }
+                clean()
+                startActivity(intent)
             }
         }
 
         binding.btnClean.setOnClickListener {
-            binding.tvResult.text = ""
-            binding.tieTotal.setText("")
-            binding.rgOptionThree.isChecked = false
-            binding.rbOptionOne.isChecked = false
-            binding.rbOptionTwo.isChecked = false
+            clean()
+
         }
 
+    }
+
+    private fun clean(){
+        binding.tieTotal.setText("")
+        binding.rgOptionThree.isChecked = false
+        binding.rbOptionOne.isChecked = false
+        binding.rbOptionTwo.isChecked = false
     }
 }

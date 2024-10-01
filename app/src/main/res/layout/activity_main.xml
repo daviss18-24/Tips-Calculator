@@ -43,7 +43,7 @@
         android:id="@+id/tie_total"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:maxLength="2"
+        android:maxLength="6"
         android:hint="Enter the number of people at the table"
         android:inputType="number" />
 
@@ -120,17 +120,6 @@
         app:layout_constraintEnd_toEndOf="@+id/spinner_number_of_people"
         app:layout_constraintStart_toEndOf="@+id/vertical_guideline"
         app:layout_constraintTop_toBottomOf="@+id/rg_percentege" />
-
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        tools:text="57.5"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_clean" />
 
 
  </androidx.constraintlayout.widget.ConstraintLayout>
